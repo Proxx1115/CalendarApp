@@ -93,6 +93,9 @@ let renderSpecials = (number, day, color) => {
       `;
   spDays.insertAdjacentHTML("beforeend", html);
 };
+
+
+// 1сар-ыг хэвлэж байгаа хэсэг
 const render_months = (n, color) => {
   if (typeof n === "object") {
     let length = n.length;
@@ -126,6 +129,8 @@ const render_months = (n, color) => {
     }
   }
 };
+
+
 // Каледарыг дэлгэцэд үзүүлж байгаа хэсэг
 const render_month_cal = (number, color, n = 0, state = 0) => {
   spDays.innerHTML = "";
@@ -181,7 +186,6 @@ const render_month_cal = (number, color, n = 0, state = 0) => {
 // Golbal Variable-ууд
 let color = 0;
 let monthNumber = 0;
-let monthArr = [];
 
 // Дэлгэц load хийхэд ажиллах хэсэг
 window.addEventListener("load", render_months(monthNumber, color));
@@ -207,6 +211,7 @@ calContainer.addEventListener("click", (e) => {
 
 // Үгээр хайлт хийх хэсэг
 const searchByValue = (searchString) => {
+  let monthArr = [];
   let c = 0;
   for (let i = 0; i < 12; i++) {
     for (let j = 1; j < 31; j++) {
@@ -222,6 +227,7 @@ const searchByValue = (searchString) => {
       }
     }
   }
+  console.log(monthArr);
   render_months(monthArr, color);
 };
 
