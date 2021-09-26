@@ -1,16 +1,8 @@
 // Үндсэн өгөгдлүүд
 const calendar2021 = {
   Jan: { 1: "Сайхан амарна" },
-  Feb: {
-    1: "Сагсны тэмцээнтэй",
-    3: "Шагнал гардуулна даа",
-    17: "Жавхлан багшийн лаб 2-ыг хийнэ",
-  },
-  Mar: {
-    2: "Энэ лабынхаа хугацааг сунгах уу яах вэ гэдэгээ шийднэ",
-    6: "Энд юу бичье дээ байз",
-    8: "Эмэгтэйчүүддээ баяр хүргэнэ дээ",
-  },
+  Feb: {1: "Сагсны тэмцээнтэй",3: "Шагнал гардуулна даа",17: "Жавхлан багшийн лаб 2-ыг хийнэ",},
+  Mar: {2: "Энэ лабынхаа хугацааг сунгах уу яах вэ гэдэгээ шийднэ",6: "Энд юу бичье дээ байз",8: "Эмэгтэйчүүддээ баяр хүргэнэ дээ",},
   Apr: { 1: "Бүгдээрээ худлаа ярьцаагаагаарай" },
   May: { 10: "Энэ сард ч ёстой юу ч болдоггүй сар даа" },
   Jun: { 6: "Жавхлан багшийн төрсөн өдөр" },
@@ -24,54 +16,14 @@ const calendar2021 = {
     30: "Дүн гаргаж дууслаа баярлалаа баяртай",
   },
 };
-let months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-const colors = [
-  "BlueViolet",
-  "Brown",
-  "BurlyWood",
-  "CadetBlue",
-  "Chartreuse",
-  "Chocolate",
-  "Coral",
-  "Cyan",
-  "DarkBlue",
-  "DarkCyan",
-  "DarkGoldenRod",
-  "DarkKhaki",
-  "DarkMagenta",
-  "DarkOliveGreen",
-  "DarkOrange",
-  "DarkOrchid",
-  "DarkRed",
-  "DarkSalmon",
-  "DarkSeaGreen",
-  "DarkSlateBlue",
-  "DarkSlateGray",
-  "DarkSlateGrey",
-  "DarkTurquoise",
-  "DarkViolet",
-  "DeepPink",
-  "DeepSkyBlue",
-  "DimGray",
-  "DimGrey",
-  "DodgerBlue",
-  "FireBrick",
-  "FloralWhite",
-  "ForestGreen",
-];
+let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec",];
+const colors = ["BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkKhaki","DarkMagenta",
+"DarkOliveGreen","DarkOrange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise", "DarkViolet",
+"DeepPink", "DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen",];
+
+// Golbal Variable-ууд
+let color = 0;
+let monthNumber = 0;
 
 // Dom-оос select хийж байгаа хэсэг
 const spDays = document.querySelector(".specialDays");
@@ -94,7 +46,6 @@ let renderSpecials = (number, day, color) => {
       `;
   spDays.insertAdjacentHTML("beforeend", html);
 };
-
 
 // 1сар-ыг хэвлэж байгаа хэсэг
 const render_months = (n, color) => {
@@ -131,7 +82,6 @@ const render_months = (n, color) => {
     }
   }
 };
-
 
 // Каледарыг дэлгэцэд үзүүлж байгаа хэсэг
 const render_month_cal = (number, color, n = 0, state = 0) => {
@@ -185,13 +135,36 @@ const render_month_cal = (number, color, n = 0, state = 0) => {
                       <div class="wd">Sat</div>`;
 };
 
-// Golbal Variable-ууд
-let color = 0;
-let monthNumber = 0;
-
+// Үгээр хайлт хийх хэсэг
+const searchByValue = (searchString) => {
+  let monthArr = [];
+  let c = 0, counter = 0;
+  for (let i = 0; i < 12; i++) {
+    for (let j = 1; j < 31; j++) {
+      if (calendar2021[months[i]][j] != undefined) {
+        if (calendar2021[months[i]][j].toLowerCase().includes(searchString.toLowerCase())) {
+          monthArr[c] = i;
+          c++;
+          counter++;
+        }
+      }
+    }
+  }
+  if(counter !==0){
+    render_months(monthArr, color);
+    error.classList.remove("background");
+    error.innerHTML = "";
+  }
+  else {
+    error.innerHTML = "Таны оруулсан үг агуулагдсан тэмдэглэлт өдөр байхгүй байна";
+    error.classList.add("background");
+    render_months(0, color);
+  }
+};
 // Дэлгэц load хийхэд ажиллах хэсэг
 window.addEventListener("load", render_months(monthNumber, color));
 
+// Event listener-үүд
 calContainer.addEventListener("click", (e) => {
   const btn = e.target.closest(".fas");
   if (btn) {
@@ -211,44 +184,14 @@ calContainer.addEventListener("click", (e) => {
   }
 });
 
-// Үгээр хайлт хийх хэсэг
-const searchByValue = (searchString) => {
-  let monthArr = [];
-  let c = 0, counter = 0;
-  for (let i = 0; i < 12; i++) {
-    for (let j = 1; j < 31; j++) {
-      if (calendar2021[months[i]][j] != undefined) {
-        if (
-          calendar2021[months[i]][j]
-            .toLowerCase()
-            .includes(searchString.toLowerCase())
-        ) {
-          monthArr[c] = i;
-          c++;
-          counter++;
-        }
-      }
-    }
-  }
-  
-  console.log(monthArr);
-  if(counter !==0){
-    render_months(monthArr, color);
-    error.classList.remove("background");
-    error.innerHTML = "";
-  }
-  else {
-    error.innerHTML = "Таны оруулсан үг агуулагдсан тэмдэглэлт өдөр байхгүй байна";
-    error.classList.add("background");
-    render_months(0, color);
-  }
-};
-
 document.addEventListener("keypress", function (event) {
   if (event.keyCode === 13 || event.which === 13) {
     const searchString = document.getElementById("search").value;
     calContainer.innerHTML = "";
     searchByValue(searchString);
-    // spDays.innerHTML = "";
+    document.getElementById("search").value = "";
   }
 });
+
+
+
