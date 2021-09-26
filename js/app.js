@@ -77,6 +77,7 @@ const colors = [
 const spDays = document.querySelector(".specialDays");
 const calContainer = document.querySelector(".cal-container");
 const calendar = document.querySelector(".calendar");
+const error  = document.querySelector(".error");
 
 // Tэмдэглэлт өдрүүдийг дэлгэцрүү нэмж байгаа хэсэг
 let renderSpecials = (number, day, color) => {
@@ -98,6 +99,7 @@ let renderSpecials = (number, day, color) => {
 // 1сар-ыг хэвлэж байгаа хэсэг
 const render_months = (n, color) => {
   if (typeof n === "object") {
+    spDays.innerHTML = "";
     let length = n.length;
     for (let i = 0; i < length; i++) {
       let html = `<div class="calendar">
@@ -133,7 +135,7 @@ const render_months = (n, color) => {
 
 // Каледарыг дэлгэцэд үзүүлж байгаа хэсэг
 const render_month_cal = (number, color, n = 0, state = 0) => {
-  spDays.innerHTML = "";
+  if(state === 0) spDays.innerHTML = "";
   const dt = new Date();
   dt.setMonth(number);
   const month = dt.toLocaleString("default", { month: "long" });
@@ -161,7 +163,7 @@ const render_month_cal = (number, color, n = 0, state = 0) => {
       if (calendar2021[months[i]][j] != undefined) {
         html += `<div class = "active" style = "background : ${colors[color]}">${j}</div>`;
 
-        if (state != 1) renderSpecials(number, j, colors[color]);
+        renderSpecials(number, j, colors[color]);
         color++;
       } else {
         html += `<div>${j}</div>`;
@@ -212,7 +214,7 @@ calContainer.addEventListener("click", (e) => {
 // Үгээр хайлт хийх хэсэг
 const searchByValue = (searchString) => {
   let monthArr = [];
-  let c = 0;
+  let c = 0, counter = 0;
   for (let i = 0; i < 12; i++) {
     for (let j = 1; j < 31; j++) {
       if (calendar2021[months[i]][j] != undefined) {
@@ -223,12 +225,23 @@ const searchByValue = (searchString) => {
         ) {
           monthArr[c] = i;
           c++;
+          counter++;
         }
       }
     }
   }
+  
   console.log(monthArr);
-  render_months(monthArr, color);
+  if(counter !==0){
+    render_months(monthArr, color);
+    error.classList.remove("background");
+    error.innerHTML = "";
+  }
+  else {
+    error.innerHTML = "Таны оруулсан үг агуулагдсан тэмдэглэлт өдөр байхгүй байна";
+    error.classList.add("background");
+    render_months(0, color);
+  }
 };
 
 document.addEventListener("keypress", function (event) {
@@ -236,5 +249,6 @@ document.addEventListener("keypress", function (event) {
     const searchString = document.getElementById("search").value;
     calContainer.innerHTML = "";
     searchByValue(searchString);
+    // spDays.innerHTML = "";
   }
 });
