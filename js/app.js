@@ -1,16 +1,9 @@
 // Үндсэн өгөгдлүүд
 const calendar2021 = {
   Jan: { 1: "Сайхан амарна" },
-  Feb: {
-    1: "Сагсны тэмцээнтэй",
-    3: "Шагнал гардуулна даа",
-    17: "Жавхлан багшийн лаб 2-ыг хийнэ",
+  Feb: {1: "Сагсны тэмцээнтэй",3: "Шагнал гардуулна даа",17: "Жавхлан багшийн лаб 2-ыг хийнэ",
   },
-  Mar: {
-    2: "Энэ лабынхаа хугацааг сунгах уу яах вэ гэдэгээ шийднэ",
-    6: "Энд юу бичье дээ байз",
-    8: "Эмэгтэйчүүддээ баяр хүргэнэ дээ",
-  },
+  Mar: {2: "Энэ лабынхаа хугацааг сунгах уу яах вэ гэдэгээ шийднэ",6: "Энд юу бичье дээ байз",8: "Эмэгтэйчүүддээ баяр хүргэнэ дээ",},
   Apr: { 1: "Бүгдээрээ худлаа ярьцаагаагаарай" },
   May: { 10: "Энэ сард ч ёстой юу ч болдоггүй сар даа" },
   Jun: { 6: "Жавхлан багшийн төрсөн өдөр" },
@@ -19,59 +12,11 @@ const calendar2021 = {
   Sept: { 1: "9-н сарын нэгэн боллоо ерөөсөө бидний баяр даа" },
   Oct: { 13: "Сур сур бас дахин сур" },
   Nov: { 2: "Сурсаар л бай" },
-  Dec: {
-    20: "Өвлийн семистер хаагдах нь дээ",
-    30: "Дүн гаргаж дууслаа баярлалаа баяртай",
-  },
-};
-let months = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sept",
-  "Oct",
-  "Nov",
-  "Dec",
-];
-const colors = [
-  "BlueViolet",
-  "Brown",
-  "BurlyWood",
-  "CadetBlue",
-  "Chartreuse",
-  "Chocolate",
-  "Coral",
-  "Cyan",
-  "DarkBlue",
-  "DarkCyan",
-  "DarkGoldenRod",
-  "DarkKhaki",
-  "DarkMagenta",
-  "DarkOliveGreen",
-  "DarkOrange",
-  "DarkOrchid",
-  "DarkRed",
-  "DarkSalmon",
-  "DarkSeaGreen",
-  "DarkSlateBlue",
-  "DarkSlateGray",
-  "DarkSlateGrey",
-  "DarkTurquoise",
-  "DarkViolet",
-  "DeepPink",
-  "DeepSkyBlue",
-  "DimGray",
-  "DimGrey",
-  "DodgerBlue",
-  "FireBrick",
-  "FloralWhite",
-  "ForestGreen",
-];
+  Dec: {20: "Өвлийн семистер хаагдах нь дээ",30: "Дүн гаргаж дууслаа баярлалаа баяртай",},};
+let months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sept","Oct","Nov","Dec",];
+const colors = ["BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","Cyan","DarkBlue","DarkCyan",
+  "DarkGoldenRod","DarkKhaki","DarkMagenta","DarkOliveGreen","DarkOrange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue",
+"DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue", "FireBrick","FloralWhite", "ForestGreen",];
 
 // Golbal Variable-ууд
 let color = 0;
